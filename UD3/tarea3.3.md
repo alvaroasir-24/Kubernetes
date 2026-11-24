@@ -46,22 +46,26 @@ spec:
 
 ## 2. Creación del Pod
 
-Desplegamos el Pod multicontenedor en el clúster:
+Desplegamos el Pod multicontenedor en el clúster y comprobamos que aparece con `0/2` contenedores mientras se crean ambas imágenes:
 
 ```bash
 kubectl apply -f pod_multicontenedor.yaml
 kubectl get pods -o wide
 ```
 
+![Manifiesto pod_multicontenedor.yaml y creación del Pod](/img/3.3.1.png)
+
 ---
 
 ## 3. Información del Pod (volumen y dos contenedores)
 
-Inspeccionamos el Pod con `kubectl describe` para comprobar que contiene los dos contenedores (`contenedor1` y `contenedor2`) y el volumen compartido `html` de tipo `EmptyDir`:
+Inspeccionamos el Pod con `kubectl describe`, comprobando en los eventos que se descargan, crean e inician correctamente los dos contenedores (`contenedor1` con `nginx` y `contenedor2` con `debian`):
 
 ```bash
 kubectl describe pod/pod-multicontenedor
 ```
+
+![Descripción y eventos del Pod multicontenedor](/img/3.3.2.png)
 
 ---
 
@@ -73,15 +77,19 @@ Cuando un Pod tiene más de un contenedor, es necesario indicar el parámetro `-
 kubectl exec pod-multicontenedor -c contenedor1 -- /bin/cat /usr/share/nginx/html/index.html
 ```
 
+![Lectura de index.html desde contenedor1](/img/3.3.3.png)
+
 ---
 
 ## 5. Comprobación de `index.html` en `contenedor2`
 
-Consultamos el mismo fichero desde el punto de montaje `/html` en el contenedor auxiliar (`contenedor2`) y verificamos que ambos comparten exactamente el mismo contenido:
+Consultamos el mismo fichero desde el punto de montaje `/html` en el contenedor auxiliar (`contenedor2`) y verificamos que ambos comparten el volumen `html` y ven las mismas fechas actualizándose cada segundo:
 
 ```bash
 kubectl exec pod-multicontenedor -c contenedor2 -- /bin/cat /html/index.html
 ```
+
+![Lectura de index.html desde contenedor2](/img/3.3.4.png)
 
 ---
 
@@ -93,4 +101,8 @@ Creamos un `port-forward` del puerto local `8081` al puerto `80` del Pod:
 kubectl port-forward pod/pod-multicontenedor 8081:80
 ```
 
-Accedemos desde el navegador a `http://localhost:8081` y refrescamos la página para comprobar cómo se van añadiendo nuevas líneas con la fecha y hora cada segundo.
+![Redirección de puertos 8081:80 con kubectl port-forward](/img/3.3.5.png)
+
+Al acceder desde el navegador a `http://localhost:8081`, comprobamos que Nginx sirve el fichero `index.html` con las fechas que va añadiendo `contenedor2` cada segundo:
+
+![Acceso desde el navegador a http://localhost:8081](/img/3.3.6.png)
