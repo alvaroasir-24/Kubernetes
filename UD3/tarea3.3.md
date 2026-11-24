@@ -59,13 +59,21 @@ kubectl get pods -o wide
 
 ## 3. Información del Pod (volumen y dos contenedores)
 
-Inspeccionamos el Pod con `kubectl describe`, comprobando en los eventos que se descargan, crean e inician correctamente los dos contenedores (`contenedor1` con `nginx` y `contenedor2` con `debian`):
+Inspeccionamos el Pod con `kubectl describe` para comprobar sus datos generales (`Status: Running`, IP `10.244.0.5`), los dos contenedores (`contenedor1` con `nginx` y `contenedor2` con `debian`), sus puntos de montaje sobre el volumen compartido `html` (`EmptyDir`), las condiciones y los eventos de arranque:
 
 ```bash
 kubectl describe pod/pod-multicontenedor
 ```
 
-![Descripción y eventos del Pod multicontenedor](/img/3.3.2.png)
+![Descripción del Pod multicontenedor - metadatos y contenedor1](/img/3.3.2a.png)
+
+![Descripción del Pod multicontenedor - montaje de contenedor1 y contenedor2](/img/3.3.2b.png)
+
+![Descripción del Pod multicontenedor - montaje de contenedor2 y condiciones](/img/3.3.2c.png)
+
+![Descripción del Pod multicontenedor - volumen compartido EmptyDir](/img/3.3.2d.png)
+
+![Descripción del Pod multicontenedor - eventos de arranque](/img/3.3.2.png)
 
 ---
 
