@@ -6,7 +6,7 @@ En esta tarea se despliega un Pod con la imagen `iesgn/test_web:latest` (servido
 
 ## 1. Creación del fichero YAML del Pod
 
-Creamos el manifiesto [pod-test-web.yaml](/UD3/pod-test-web.yaml) definiendo:
+Creamos el manifiesto [pod-test-web.yaml](/UD3/contenido/pod-test-web.yaml) definiendo:
 
 - **Nombre del Pod:** `pod-test-web`
 - **Nombre del contenedor:** `contenedor-web` (distinto al del Pod)

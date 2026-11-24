@@ -2,7 +2,7 @@
 
 Un **Pod multicontenedor** permite ejecutar varios contenedores estrechamente acoplados (una aplicación principal y uno o más contenedores auxiliares o *sidecars*) que comparten red (`localhost`) y almacenamiento mediante **volúmenes**.
 
-En esta tarea desplegamos el manifiesto [pod_multicontenedor.yaml](/UD3/pod_multicontenedor.yaml), que define el Pod `pod-multicontenedor` con:
+En esta tarea desplegamos el manifiesto [pod_multicontenedor.yaml](/UD3/contenido/pod_multicontenedor.yaml), que define el Pod `pod-multicontenedor` con:
 
 - **Volumen `html` (`emptyDir`):** directorio compartido entre los dos contenedores (efímero: se pierde al eliminar el Pod).
 - **`contenedor1` (`nginx`):** contenedor principal que monta el volumen `html` en `/usr/share/nginx/html` para servir la página web.
@@ -12,7 +12,7 @@ En esta tarea desplegamos el manifiesto [pod_multicontenedor.yaml](/UD3/pod_mult
 
 ## 1. Definición del Pod multicontenedor
 
-Revisamos el fichero [pod_multicontenedor.yaml](/UD3/pod_multicontenedor.yaml):
+Revisamos el fichero [pod_multicontenedor.yaml](/UD3/contenido/pod_multicontenedor.yaml):
 
 ```yaml
 apiVersion: v1
