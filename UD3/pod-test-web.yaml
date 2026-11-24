@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-test-web
+  labels:
+    app: test-web
+spec:
+  containers:
+    - name: contenedor-web
+      image: iesgn/test_web:latest
+      ports:
+        - containerPort: 80
